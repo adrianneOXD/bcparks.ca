@@ -36,5 +36,31 @@ test.describe('Find a park page tests', async ()=>{
         await expect(page.getByText('Facilities')).toBeVisible();
         await expect(page.getByRole('heading', { name: 'More ways to find a park' })).toBeVisible();
     });
+
+    test('Verify the links on the page redirects to the correct page', async ({page})=>{
+        await page.getByRole('menuitem', { name: 'Find a park' }).click();
+        await page.getByRole('link', { name: 'A–Z park list' }).click();
+        await expect(page).toHaveURL(baseURL + 'find-a-park/a-z-list/');
+        await expect(page).toHaveTitle('A–Z park list | BC Parks');
+        await expect(page.getByRole('heading', { name: 'A–Z park list' })).toBeVisible();
+        await page.goBack();
+        await page.waitForLoadState('networkidle');
+        await page.getByRole('link', { name: 'Map', exact: true }).click();
+        await page.waitForLoadState('networkidle');        
+        await expect(page).toHaveTitle('BC Parks Map');
+    });
+
+   /* test('Apply filters to narrow down search', async ({page})=>{
+        await page.getByRole('menuitem', { name: 'Find a park' }).click();
+        await page.getByLabel('Picnic areas').check();
+        await page.getByLabel('Lower Mainland').check();
+        await page.getByLabel('Canoeing').check();
+        await page.getByLabel('Accessibility information').check();
+        await expect(page.getByRole('button', { name: 'Lower Mainland' })).toBeVisible();
+        await expect(getByRole('button', { name: 'Canoeing' })).toBeVisible();
+        await expect(getByRole('button', { name: 'Canoeing' })).toBeVisible();
+        await expect(getByRole('button', { name: 'Accessibility information' })).toBeVisible();
+    });
+    */
 });
 
