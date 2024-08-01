@@ -50,17 +50,22 @@ test.describe('Find a park page tests', async ()=>{
         await expect(page).toHaveTitle('BC Parks Map');
     });
 
-   /* test('Apply filters to narrow down search', async ({page})=>{
+   test('Apply filters to narrow down search', async ({page})=>{
         await page.getByRole('menuitem', { name: 'Find a park' }).click();
+        //Applying the 'Backcountry camping' filter
+        await page.locator('//*[@id="gatsby-focus-wrapper"]/div[3]/div/div[2]/div[1]/div[1]/div/fieldset[1]/div[1]/div/label').check();
+        await expect(page.getByRole('button', { name: 'Backcountry' })).toBeVisible();
+
+       
+       
+       /*
         await page.getByLabel('Picnic areas').check();
         await page.getByLabel('Lower Mainland').check();
         await page.getByLabel('Canoeing').check();
         await page.getByLabel('Accessibility information').check();
-        await expect(page.getByRole('button', { name: 'Lower Mainland' })).toBeVisible();
-        await expect(getByRole('button', { name: 'Canoeing' })).toBeVisible();
-        await expect(getByRole('button', { name: 'Canoeing' })).toBeVisible();
-        await expect(getByRole('button', { name: 'Accessibility information' })).toBeVisible();
+
+        */
     });
-    */
+
 });
 
