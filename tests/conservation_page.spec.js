@@ -21,7 +21,9 @@ test.describe('Static section landing page - Conservation page test', ()=>{
         await expect(page.getByRole('heading', { name: 'Conservation', exact: true })).toBeVisible();
     });
 
-    test('Check that Find a park search is visibl and working', async ({page})=>{
+    test('Check that Find a park search is visible and working', async ({page})=>{
+        await page.getByRole('menuitem', { name: 'Conservation' }).click();
+        await page.getByRole('menuitem', { name: 'Conservation', exact: true }).click();
         await expect(page.locator('div').filter({ hasText: /^Find a parkBy park nameSearch$/ }).first()).toBeVisible();
         await page.getByPlaceholder(' ').click();
         await page.getByPlaceholder(' ').fill('Garibaldi');
