@@ -74,8 +74,7 @@ test('Check the park information is displayed', async ({page})=>{
     await page.waitForLoadState('networkidle');        
     await page.getByLabel('V', { exact: true}).click();
     await expect(page.getByRole('link', { name: 'Vaseux Lake Park'})).toBeVisible();
-    await expect(page.getByText('Vaseux Lake ParkOpen.The park')).toBeVisible();
-    await expect(page.getByText('Open.The park is open year-round.')).toBeVisible();
+    await expect(page.getByText('Open, check advisories (1).The park is open year-round.')).toBeVisible();;
     await expect(page.getByRole('cell', { name: 'Vaseux Lake Campground' })).toBeVisible();
 });
 
