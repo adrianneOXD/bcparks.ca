@@ -179,8 +179,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Park operators' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'News' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Get involved ' }).click();
-        await page.getByRole('menuitem', { name: 'Engage with us' }).click();
-        await page.getByRole('menuitem', { name: 'Get involved ' }).click();
+        await expect(page.getByRole('menuitem', { name: 'Engage with us' })).toBeVisible()
     })
 
     //Check the Contact menu item, assert the navigateion to the corret page url
