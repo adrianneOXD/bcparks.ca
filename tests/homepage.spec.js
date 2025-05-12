@@ -198,6 +198,16 @@ test.describe('Home page tests', ()=>{
         
     });
 
+    test('Check the land acknowledgment message is visible', async ({page})=>{
+        await page.waitForLoadState('networkidle');
+        await page.evaluate(() =>{
+            window.scrollBy(0, 5000);
+        });
+        await expect(page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1)).toBeVisible();
+        await expect(page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
+        await expect(page.getByText('We acknowledge all First')).toBeVisible();
+    });
+
 });
 
 
