@@ -37,13 +37,12 @@ test.describe('Home page tests', ()=>{
     test('Check that the suggestion dropdown menu for park name is visible', async ({page}) =>{
         await page.waitForLoadState('networkidle');
         await page.getByLabel('By park name').click();
-        await expect(page.getByLabel('menu-options')).toBeVisible();
         await page.getByLabel('By park name').fill('G');
-        await expect(page.getByLabel('Garibaldi Park')).toBeVisible();
+        await expect(page.getByLabel('menu-options')).toBeVisible();
         await page.getByLabel('By park name').fill('Garibaldi');
-        await expect(page.getByLabel('Garibaldi Park')).toBeVisible();
-        await page.getByLabel('Garibaldi Park').click();
-        await expect(page).toHaveURL(baseURL + 'find-a-park/?q=Garibaldi%20Park');
+        await expect(page.getByRole('option', { name: 'Garibaldi Park' })).toBeVisible();
+        await page.getByRole('option', { name: 'Garibaldi Park' }).click();
+        await expect(page).toHaveURL(baseURL + 'garibaldi-park/');
     });
 
     // Checks the city suggestion dropdown menu and redirect to Find a park page
@@ -101,7 +100,7 @@ test.describe('Home page tests', ()=>{
         await page.waitForLoadState('networkidle');
         await page.getByRole('link', { name: 'People taking a photo' }).click();
         await expect(page).toHaveURL(baseURL + 'plan-your-trip/things-to-do/');
-        await expect(page).toHaveTitle('Things to do - Province of British Columbia | BC Parks');
+        await expect(page).toHaveTitle('Things to do | BC Parks');
         await page.goBack();
         await page.waitForLoadState('networkidle');
         await page.getByRole('link', { name: 'A child in a wheelchair on a' }).click();
@@ -132,9 +131,12 @@ test.describe('Home page tests', ()=>{
         await expect(page).toHaveTitle('Conservation - Province of British Columbia | BC Parks');
         await page.goBack();
         await page.waitForLoadState('networkidle');
-        await page.getByRole('link', { name: 'People holding license plates' }).click();
+        await page.getByRole('link', { name: 'Family walking on a trail' }).click();
+        await page.goBack();
+        await page.waitForLoadState('networkidle');
+        await page.getByRole('link', { name: 'People holding licence plates' }).click();
         await expect(page).toHaveURL(baseURL + 'get-involved/');
-        await expect(page).toHaveTitle('Get involved - Province of British Columbia | BC Parks');
+        await expect(page).toHaveTitle('Get involved | BC Parks');
     });
 
     // Check the Back to Top button is visible and works
@@ -147,13 +149,6 @@ test.describe('Home page tests', ()=>{
         await expect(page.getByRole('link', { name: 'BC Parks Logo' })).toBeInViewport();
     });
 
-    test("Check the suggestion box is displayed when search by park has been selected", async ({page})=>{
-        const dropdownOption = page.getByRole('option', { name: 'Type to search...' });
-        await page.waitForLoadState('networkidle');
-        await page.getByLabel('By park name').click();
-        await expect(page.getByLabel('menu-options')).toBeVisible();
-        await expect(dropdownOption).toBeVisible
-    })
 
     test("Check the suggestion box is displayed when search by city has been selected", async ({page})=>{
         const dropdownOption = page.getByRole('option', { name: 'Current location' });

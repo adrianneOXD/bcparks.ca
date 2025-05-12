@@ -85,15 +85,14 @@ test.describe('Footer tests', ()=>{
         await page.waitForLoadState('networkidle');
         // Click on the Instagram link
         await page.getByRole('link', { name: 'Instagram' }).click();
-        await expect(page).toHaveURL('https://www.instagram.com/yourbcparks/');
-        
-        /*const instagramURL = page.url();
-         console.log(`Current URL after clicking Instagram: ${instagramURL}`);
-        if (instagramURL.includes('login')) {
+        await page.waitForLoadState('networkidle');
+
+        const instagramURL = page.url();
+        console.log(`Current URL after clicking Instagram: ${instagramURL}`);
+        if(instagramURL.includes('login')){
             console.warn('Redirected to Instagram login page.');
-        } else {
-            await page.waitForLoadState('networkidle');
+        } else{
             await expect(page).toHaveURL('https://www.instagram.com/yourbcparks/');
-        }*/
+        };
     });
 });

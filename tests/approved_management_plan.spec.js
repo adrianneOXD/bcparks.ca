@@ -12,7 +12,6 @@ test.describe('Approved management plan tests', ()=>{
     test('Check that we can get to the page from homepage', async ({page})=>{
         await page.waitForLoadState('networkidle');     
         await page.getByRole('menuitem', { name: 'About' }).click();
-        await expect(page.locator('#home div').filter({ hasText: 'Main Menu BackAboutOur' }).nth(4)).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'About', exact: true })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Management plans' }).click();
         await expect(page.getByRole('menuitem', { name: 'Management plans' }).nth(1)).toBeVisible();

@@ -35,15 +35,15 @@ test.describe('All advisories page tests', ()=>{
     test('Verify the Event search is working', async ({page}) =>{
         await page.goto(activeAdvisoriesURL);
         await page.waitForLoadState('networkidle');
-        await page.getByLabel('Select an event').click();
-        await page.getByLabel('Select an event').fill('Avalanche', { customTimeout });
-        await page.getByLabel('Avalanche', { exact: true }).click();
+        await page.getByLabel('Select a type').click();
+        await page.getByLabel('Select a type').fill('Avalanche', { customTimeout });
+        await page.getByRole('option', { name: 'Avalanche', exact: true }).click();
         await page.getByRole('button', { name: 'Search' }).click();
         await expect(page.locator('h1', {name : 'Active advisories | Avalanche'})).toBeVisible();
         await page.getByLabel('Clear').click();
-        await expect(page.getByLabel('Select an event')).toBeEmpty();
-        await page.getByLabel('Select an event').fill('Fire');
-        await page.getByLabel('Wildfire', { exact: true }).click();
+        await expect(page.getByLabel('Select a type')).toBeEmpty();
+        await page.getByLabel('Select a type').fill('Fire');
+        await page.getByRole('option', { name: 'Wildfire', exact: true }).click();
         await page.getByRole('button', {name :  'Search'}).click();
         await expect(page.locator('h1', {name : 'Active advisories | Fire'})).toBeVisible();
     });

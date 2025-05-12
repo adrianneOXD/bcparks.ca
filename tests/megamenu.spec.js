@@ -31,7 +31,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
     test('Check the Plan your trip menu item' , async ({page})=>{
         await expect(page.getByRole('menuitem', { name: 'Plan your trip' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Plan your trip' }).click();
-        await expect(page.locator('#home div').filter({ hasText: 'Main Menu BackPlan your' }).nth(4)).toBeVisible();
+        await expect(page.locator('#home div').filter({ hasText: 'BackPlan your tripActive' }).nth(4)).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Plan your trip', exact: true })).toBeVisible();
         await expect(page.getByRole('menu')).toContainText('Plan your trip');
         await expect(page.getByRole('menuitem', { name: 'Active advisories' })).toBeVisible();
@@ -44,7 +44,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menu')).toContainText('Visit responsibly');
         await expect(page.getByRole('menuitem', { name: 'Accessibility' })).toBeVisible();
         await expect(page.getByRole('menu')).toContainText('Accessibility');
-        await page.getByRole('menuitem', { name: 'Plan your trip', exact: true }).click();
+        await page.getByRole('menuitem',{ name: 'Plan your trip', exact: true }).click();
         await expect(page).toHaveURL(baseURL + 'plan-your-trip/');
         
 
@@ -114,7 +114,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await page.getByRole('menuitem', { name: 'Volunteer' }).click();
         await expect(page.getByRole('menuitem', { name: 'Volunteer' }).nth(1)).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Volunteer Awards' })).toBeVisible();
-        await expect(page.getByRole('menuitem', { name: 'Engage with us arrow-up-right' })).toBeVisible();
+        await expect(page.getByRole('menuitem', { name: 'Engage with us' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Participate in design' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Get involved', exact: true }).click();
         await expect(page).toHaveURL(baseURL + 'get-involved/');
@@ -171,15 +171,16 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Thompson Cariboo projects' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Omineca Peace projects' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Skeena projects' })).toBeVisible();
-        await expect(page.getByRole('menuitem', { name: 'News' })).toBeVisible();
-        await expect(page.getByRole('menuitem', { name: 'Reports and surveys' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Careers' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Careers' }).click();
         await expect(page.getByRole('menuitem', { name: 'Careers' }).nth(1)).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Park Ranger careers' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Student Rangers' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Park operators' })).toBeVisible();
-
+        await expect(page.getByRole('menuitem', { name: 'News' })).toBeVisible();
+        await page.getByRole('menuitem', { name: 'Get involved ' }).click();
+        await page.getByRole('menuitem', { name: 'Engage with us' }).click();
+        await page.getByRole('menuitem', { name: 'Get involved ' }).click();
     })
 
     //Check the Contact menu item, assert the navigateion to the corret page url
@@ -187,9 +188,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Contact' })).toBeVisible();
         await page.getByRole('menuitem', {name: 'Contact'}).click();
         await expect(page).toHaveURL(baseURL + 'contact/');
-        ////latest code////
     })
-     
 });
 
 

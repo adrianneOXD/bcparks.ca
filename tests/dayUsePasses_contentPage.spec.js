@@ -16,9 +16,9 @@ test('Verify the navigation to the Day-use passes page', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await page.getByRole('menuitem', { name: 'Reservations' }).click();
     await page.getByRole('menuitem', { name: 'Day-use passes' }).click();
+    await page.getByRole('menuitem', { name: 'Day-use passes' }).nth(1).click()
     await expect(page).toHaveURL(baseURL + 'reservations/day-use-passes/');
-    await expect(page).toHaveTitle('Day-use passes - Province of British Columbia | BC Parks');
-  
+    await expect(page).toHaveTitle('Day-use passes | BC Parks');
   });
 
 
@@ -30,17 +30,19 @@ test('Verify the page content', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Day-use passes', exact: true })).toBeVisible();
     await expect(page.locator('h1')).toContainText('Day-use passes');
     await expect(page.getByRole('img', { name: 'Day-use passes' })).toBeVisible();
-    await expect(page.getByText('Joffre LakesGaribaldiGolden EarsMount SeymourWhy day-use passes?', { exact: true })).toBeVisible();
-    await expect(page.locator('#section-navbar').getByRole('link', { name: 'Joffre Lakes' })).toBeVisible();
-    await expect(page.locator('#section-navbar')).toContainText('Joffre Lakes');
-    await expect(page.locator('#section-navbar').getByRole('link', { name: 'Garibaldi' })).toBeVisible();
-    await expect(page.locator('#section-navbar')).toContainText('Garibaldi');
-    await expect(page.locator('#section-navbar').getByRole('link', { name: 'Golden Ears' })).toBeVisible();
-    await expect(page.locator('#section-navbar')).toContainText('Golden Ears');
-    await expect(page.locator('#section-navbar').getByRole('link', { name: 'Mount Seymour' })).toBeVisible();
-    await expect(page.locator('#section-navbar')).toContainText('Mount Seymour');
+    await expect(page.getByText('On this pageJoffre')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Joffre Lakes' }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Joffre Lakes' }).first()).toContainText('Joffre Lakes');
+    await expect(page.getByRole('link', { name: 'Garibaldi' }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Garibaldi' }).first()).toContainText('Garibaldi');
+    await expect(page.getByRole('link', { name: 'Golden Ears' }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Golden Ears' }).first()).toContainText('Golden Ears');
+    await expect(page.getByRole('link', { name: 'Mount Seymour' }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Mount Seymour' }).first()).toContainText('Mount Seymour');
+    await expect(page.getByRole('link', { name: 'Day-use pass exemptions', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Day-use pass exemptions', exact: true })).toContainText('Day-use pass exemptions');
     await expect(page.getByRole('link', { name: 'Why day-use passes?', exact: true })).toBeVisible();
-    await expect(page.locator('#section-navbar')).toContainText('Why day-use passes?');
+    await expect(page.getByRole('link', { name: 'Why day-use passes?', exact: true })).toContainText('Why day-use passes?');
     await expect(page.locator('.page-content')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Book a pass' }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: 'Book a pass' }).first()).toHaveAttribute('href', 'https://reserve.bcparks.ca/dayuse/');
