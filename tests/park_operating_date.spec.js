@@ -109,5 +109,17 @@ test('Check the park links are working and redirect to the correct site', async(
     };
 });
 
+test('Check the land acknowledgment message is visible', async ({page})=>{
+    await page.getByRole('menuitem', { name: 'Plan your trip' }).click();
+    await page.getByRole('menuitem', { name: 'Park operating dates' }).click();
+    await page.waitForLoadState('networkidle');
+    await page.evaluate(() =>{
+        window.scrollBy(0, 5000);
+    });
+    await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toBeVisible();
+    await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
+    await expect(page.getByText('We acknowledge all First')).toBeVisible();
+});
+
 });
 

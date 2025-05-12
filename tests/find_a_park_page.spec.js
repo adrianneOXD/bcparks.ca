@@ -172,4 +172,15 @@ test.describe('Find a park page tests', async ()=>{
         await page.getByRole('button', { name: 'Load more results' }).click();
         await expect(page.getByText('Arctic Pacific Lakes ParkOminecasee allOpen').first()).toBeVisible();
     });
+
+    test('Check the land acknowledgment message is visible', async ({page})=>{
+        await page.getByRole('menuitem', { name: 'Find a park' }, customTimeout).click();
+        await page.waitForLoadState('networkidle');
+        await page.evaluate(() =>{
+            window.scrollBy(0, 5000);
+        });
+        await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toBeVisible();
+        await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
+        await expect(page.getByText('We acknowledge all First')).toBeVisible();
+    });
 });

@@ -49,3 +49,14 @@ test('Verify the page content', async ({ page }) => {
     await expect(page.locator('#gatsby-focus-wrapper')).toContainText('Day-use passes are required to visit some of the most popular BC Parks during their busiest times. Passes are free, and you can get them online. This page has everything you need to know about getting a pass, and it explains why these passes are important.');
     await expect(page.locator('#home-footer')).toBeVisible();
   });
+
+  test('Check the land acknowledgment message is visible', async ({page})=>{
+    await page.goto(baseURL + 'reservations/day-use-passes/');
+    await page.waitForLoadState('networkidle');
+    await page.evaluate(() =>{
+        window.scrollBy(0, 5000);
+    });
+    await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toBeVisible();
+    await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
+    await expect(page.getByText('We acknowledge all First')).toBeVisible();
+});
