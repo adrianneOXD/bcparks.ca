@@ -95,5 +95,20 @@ test.describe('All advisories page tests', ()=>{
         await expect(page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
         await expect(page.getByText('We acknowledge all First')).toBeVisible();
     });
+
+    test('Check the back to top button is working', async ({ page }) => {
+        await page.waitForLoadState('networkidle');
+        await page.getByText('See all advisories').click();
+        await page.waitForTimeout(5000);
+        await page.evaluate(() => {
+            window.scrollBy(0, 5000);
+        });
+        await expect(page.getByLabel('scroll to top')).toBeVisible();
+        await page.getByLabel('scroll to top').click();
+        await page.waitForTimeout(5000)
+        const updatedScrollPosition = await page.evaluate(() => window.scrollY);
+        expect(updatedScrollPosition).toBe(0);
+        await expect(page.getByLabel('scroll to top')).toBeHidden();
+    });
 });
    

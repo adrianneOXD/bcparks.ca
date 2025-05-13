@@ -99,11 +99,34 @@ test.describe('Approved management plan tests', ()=>{
 
     test('Check the land acknowledgment message is visible', async ({page})=>{
         await page.waitForLoadState('networkidle');
+        await page.getByRole('menuitem', { name: 'About' }).click();
+        await expect(page.getByRole('menuitem', { name: 'About', exact: true })).toBeVisible();
+        await page.getByRole('menuitem', { name: 'Management plans' }).click();
+        await page.getByRole('menuitem', { name: 'Management plans' }).nth(1).click();
+        await page.waitForLoadState('networkidle');
         await page.evaluate(() =>{
             window.scrollBy(0, 5000);
         });
-        await expect(page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1)).toBeVisible();
-        await expect(page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
+        await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toBeVisible();
+        await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
         await expect(page.getByText('We acknowledge all First')).toBeVisible();
+    });
+
+    test('Check the back to top button is working', async ({ page }) => {
+        await page.waitForLoadState('networkidle');
+        await page.getByRole('menuitem', { name: 'About' }).click();
+        await expect(page.getByRole('menuitem', { name: 'About', exact: true })).toBeVisible();
+        await page.getByRole('menuitem', { name: 'Management plans' }).click();
+        await page.getByRole('menuitem', { name: 'Management plans' }).nth(1).click();
+        await page.waitForTimeout(5000);
+        await page.evaluate(() => {
+            window.scrollBy(0, 5000);
+        });
+        await expect(page.getByLabel('scroll to top')).toBeVisible();
+        await page.getByLabel('scroll to top').click();
+        await page.waitForTimeout(5000)
+        const updatedScrollPosition = await page.evaluate(() => window.scrollY);
+        expect(updatedScrollPosition).toBe(0);
+        await expect(page.getByLabel('scroll to top')).toBeHidden();
     });
 });
