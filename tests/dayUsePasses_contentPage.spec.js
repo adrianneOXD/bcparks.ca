@@ -60,3 +60,22 @@ test('Verify the page content', async ({ page }) => {
     await expect(page.locator('div').filter({ hasText: 'We acknowledge all First' }).nth(3)).toContainText('We acknowledge all First Nations on whose territories BC Parks were established. We honour their connection to the land and respect the importance of their diverse teachings, traditions, and practices within these territories.')
     await expect(page.getByText('We acknowledge all First')).toBeVisible();
 });
+
+  test('Check the back to top button is working', async ({ page }) => {
+    await page.waitForLoadState('networkidle');
+    await page.getByRole('menuitem', { name: 'Reservations' }).click();
+    await page.getByRole('menuitem', { name: 'Day-use passes' }).click();
+    await page.getByRole('menuitem', { name: 'Day-use passes' }).nth(1).click()
+    await page.waitForTimeout(5000);
+    await page.evaluate(() => {
+        window.scrollBy(0, 5000);
+    });
+    await expect(page.getByLabel('scroll to top')).toBeVisible();
+    await page.getByLabel('scroll to top').click();
+    await page.waitForTimeout(5000)
+    const updatedScrollPosition = await page.evaluate(() => window.scrollY);
+    expect(updatedScrollPosition).toBe(0);
+    await expect(page.getByLabel('scroll to top')).toBeHidden();
+  });
+
+
