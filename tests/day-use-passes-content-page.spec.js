@@ -4,11 +4,10 @@
 import { test, expect } from '@playwright/test';
 
 //base URL for the tests
-const baseURL = 'https://bcparks.ca/';
 
 //wait for the page to load before running the tests
 test.beforeEach(async ({page})=>{
-    await page.goto(baseURL);
+    await page.goto('/');
 });
 
 // Test navigation to the Day-use passes page via the mega menu
@@ -17,13 +16,13 @@ test('Verify the navigation to the Day-use passes page', async ({ page }) => {
     await page.getByRole('menuitem', { name: 'Reservations' }).click();
     await page.getByRole('menuitem', { name: 'Day-use passes' }).click();
     await page.getByRole('menuitem', { name: 'Day-use passes' }).nth(1).click()
-    await expect(page).toHaveURL(baseURL + 'reservations/day-use-passes/');
+    await expect(page).toHaveURL('/' + 'reservations/day-use-passes/');
     await expect(page).toHaveTitle('Day-use passes | BC Parks');
   });
 
 
 test('Verify the page content', async ({ page }) => {
-    await page.goto(baseURL + 'reservations/day-use-passes/');
+    await page.goto('/' + 'reservations/day-use-passes/');
     test.setTimeout(60000);
     await expect(page.getByText('Home›Reservations›Day-use')).toBeVisible();
     await expect(page.getByLabel('breadcrumb').locator('div')).toContainText('Day-use passes');
@@ -51,7 +50,7 @@ test('Verify the page content', async ({ page }) => {
   });
 
   test('Check the land acknowledgment message is visible', async ({page})=>{
-    await page.goto(baseURL + 'reservations/day-use-passes/');
+    await page.goto('/' + 'reservations/day-use-passes/');
     await page.waitForLoadState('networkidle');
     await page.evaluate(() =>{
         window.scrollBy(0, 5000);

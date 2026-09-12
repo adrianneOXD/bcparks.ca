@@ -3,12 +3,9 @@
 // Import the test and expect functions from Playwright
 import { test, expect } from '@playwright/test';
 
-//base URL for the tests
-const baseURL = 'https://bcparks.ca/';
-
 //wait for the page to load before running the tests
 test.beforeEach(async ({page})=>{
-    await page.goto(baseURL);
+    await page.goto('/');
 });
 
 //test tverify the Megamenu
@@ -23,7 +20,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
     test('Check the Find a park menu item' , async ({page})=>{
         await expect(page.getByRole('menuitem', { name: 'Find a park' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Find a park' }).click();
-        await expect(page).toHaveURL(baseURL + 'find-a-park/');
+        await expect(page).toHaveURL('/' + 'find-a-park/');
         //check if the correct page title is displayed. Add tests.
     })
 
@@ -45,7 +42,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Accessibility' })).toBeVisible();
         await expect(page.getByRole('menu')).toContainText('Accessibility');
         await page.getByRole('menuitem',{ name: 'Plan your trip', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'plan-your-trip/');
+        await expect(page).toHaveURL('/' + 'plan-your-trip/');
         
 
     })
@@ -69,7 +66,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'BC Senior Camping Discount' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Social Services Camping Fee' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Reservations', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'reservations/');
+        await expect(page).toHaveURL('/' + 'reservations/');
     
         
     })
@@ -96,7 +93,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Invasive species' }).nth(1)).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Ecological reserves' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Conservation', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'conservation/');
+        await expect(page).toHaveURL('/' + 'conservation/');
 
     })
 
@@ -117,7 +114,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Engage with us' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Participate in design' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Get involved', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'get-involved/');
+        await expect(page).toHaveURL('/' + 'get-involved/');
 
     })
 
@@ -134,7 +131,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Filming' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Travel trade' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Park-use permits', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'park-use-permits/');
+        await expect(page).toHaveURL('/' + 'park-use-permits/');
 
     })
 
@@ -145,7 +142,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'About', exact: true })).toBeVisible();
         await expect(page.getByRole('menu')).toContainText('About');
         await page.getByRole('menuitem', { name: 'About', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'about/');
+        await expect(page).toHaveURL('/' + 'about/');
         await page.getByRole('menuitem', { name: 'About ' }).click();
         await page.getByRole('menuitem', { name: 'Our mission and' }).click();
         await expect(page.getByRole('menu')).toContainText('Our mission and responsibilities');
@@ -186,7 +183,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
     test ('Check the Contact menu item' , async ({page})=>{
         await expect(page.getByRole('menuitem', { name: 'Contact' })).toBeVisible();
         await page.getByRole('menuitem', {name: 'Contact'}).click();
-        await expect(page).toHaveURL(baseURL + 'contact/');
+        await expect(page).toHaveURL('/' + 'contact/');
     })
 });
 

@@ -12,7 +12,7 @@ export class BasePage{
         this.backToTopButton = page.getByLabel('scroll to top');
 
     // Land acknowledgement message
-        this.landAcknowledgementMessage = page.locator('#home div').filter({ hasText: 'We acknowledge all First' }).nth(1);
+        this.landAcknowledgementMessage = page.getByText('We acknowledge all First Nations on whose territories BC Parks');
     }
 
     async goto(path = ''){

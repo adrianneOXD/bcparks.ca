@@ -1,21 +1,21 @@
-import dotenv from 'dotenv'
-require ('dotenv').config();
-
-
-dotenv.config({
-  path: `./.env/.env.${process.env.ENV}`,
-})
-
-// @ts-check
 const { defineConfig, devices } = require('@playwright/test');
+const dotenv = require('dotenv');
+const path = require('path');
 
+// 1. Determine the environment (defaults to 'prod')
+const environment = process.env.ENV || 'prod';
+console.log("CURRENT ENVIRONMENT IS:", environment);
+
+// 2. Load the corresponding .env file from the root directory
+const result = dotenv.config({path: path.resolve(__dirname, `env/.env.${environment}`)});
+console.log("dotenv result:", result);
+console.log("PROD_URL loaded as:", process.env.PROD_URL);
 
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -37,7 +37,7 @@ module.exports = defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.PROD_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -53,13 +53,11 @@ module.exports = defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-    }
-/*
+    },
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    },
-*/
+    }
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

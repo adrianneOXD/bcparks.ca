@@ -1,12 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Approved management plan tests', ()=>{
-
-    const baseURL = 'https://bcparks.ca/';
     const approvedManagementPlanURL = 'https://bcparks.ca/about/management-plans/approved/';
     
     test.beforeEach(async ({page})=>{
-        await page.goto(baseURL);   
+        await page.goto('/');   
     });
     
     test('Check that we can get to the page from homepage', async ({page})=>{
@@ -16,7 +14,7 @@ test.describe('Approved management plan tests', ()=>{
         await page.getByRole('menuitem', { name: 'Management plans' }).click();
         await expect(page.getByRole('menuitem', { name: 'Management plans' }).nth(1)).toBeVisible();
         await page.getByRole('menuitem', { name: 'Approved management plans' }).click();
-        await expect(page).toHaveURL(baseURL + 'about/management-plans/approved/');
+        await expect(page).toHaveURL('/' + 'about/management-plans/approved/');
         await expect(page).toHaveTitle('Approved management plans | BC Parks');
         await expect(page.locator('h1', { name: 'Approved management plans'})).toBeVisible();
     });
@@ -26,15 +24,15 @@ test.describe('Approved management plan tests', ()=>{
         await expect (page.locator('#main-content')).toBeVisible();
         await page.goto(approvedManagementPlanURL);
         await page.getByRole('link', { name: 'Home' }).click();
-        await expect(page).toHaveURL(baseURL);
+        await expect(page).toHaveURL('/');
         await page.goBack();
         await page.waitForLoadState('networkidle'); 
         await page.getByRole('link', { name: 'About' }).click();
-        await expect(page).toHaveURL(baseURL + 'about/');
+        await expect(page).toHaveURL('/' + 'about/');
         await page.goBack();
         await page.waitForLoadState('networkidle'); 
         await page.getByRole('link', { name: 'Management plans', exact: true }).click();
-        await expect(page).toHaveURL(baseURL + 'about/management-plans/');
+        await expect(page).toHaveURL('/' + 'about/management-plans/');
         await page.goBack();
         await page.waitForLoadState('networkidle'); 
         await expect(page.getByLabel('breadcrumb').getByText('Approved management plans')).toBeVisible();

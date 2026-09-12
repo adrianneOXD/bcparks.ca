@@ -2,10 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Footer tests', ()=>{
 
-    const baseURL = 'https://bcparks.ca/';
-
     test.beforeEach(async ({page})=>{
-        await page.goto(baseURL);
+        await page.goto('/');
         await page.waitForLoadState('domcontentloaded');        
     });
 
@@ -17,8 +15,8 @@ test.describe('Footer tests', ()=>{
         await page.getByRole('menuitem', { name: 'Contact' }).click();
         await expect(page.getByRole('link', { name: 'BC Parks Wordmark' })).toBeVisible();
         await page.getByRole('link', { name: 'BC Parks Wordmark' }).click();
-        await expect(page).toHaveURL(baseURL);
-    })
+        await expect(page).toHaveURL('/');
+    });
 
     test('Check the heading on the footer is visible', async ({page}) =>{
         await expect(page.locator('#home-footer').getByText('Get a permit')).toBeVisible();
@@ -26,48 +24,74 @@ test.describe('Footer tests', ()=>{
         await expect(page.locator('#home-footer').getByText('Stay connected')).toBeVisible();
     });
 
-    test('Check the links on the footer are visible and are working', async ({page}) =>{
+    // Footer Links
+    test('Park-use permits footer link', async ({page}) =>{
         await page.locator('#home-footer').getByText('Park-use permits').click();
-        await expect(page).toHaveURL(baseURL + 'park-use-permits/');
-        await page.goBack();
-        await expect(page).toHaveURL(baseURL);
+        await expect(page).toHaveURL('/' + 'park-use-permits/');
+    });
+
+    test('Filming in parks footer link', async ({ page })=>{
         await page.locator('#home-footer').getByText('Filming in parks').click();
-        await expect(page).toHaveURL(baseURL + 'park-use-permits/filming-in-parks/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'park-use-permits/filming-in-parks/');
+    });
+
+    test('Travel trade footer link', async ({ page })=>{
         await page.locator('#home-footer').getByText('Travel trade').click();
-        await expect(page).toHaveURL(baseURL + 'park-use-permits/travel-trade/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'park-use-permits/travel-trade/');       
+    });
+
+    test('Donate footer link', async ({ page })=>{        
         await page.locator('#home-footer').getByText('Donate').click();
-        await expect(page).toHaveURL(baseURL + 'get-involved/donate/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'get-involved/donate/');
+    });
+
+
+    test('Buy a licence plate footer link', async ({ page })=>{
         await page.locator('#home-footer').getByText('Buy a licence plate').click();
-        await expect(page).toHaveURL(baseURL + 'get-involved/buy-licence-plate/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'get-involved/buy-licence-plate/');
+    });
+
+
+    test('Volunteer footer link', async ({ page })=>{
         await page.locator('#home-footer').getByText('Volunteer').click();
-        await expect(page).toHaveURL(baseURL + 'get-involved/volunteer/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'get-involved/volunteer/');
+    });
+
+    test('Contact us footer link', async ({ page })=>{
         await page.locator('#home-footer').getByText('Contact us').click();
-        await expect(page).toHaveURL(baseURL + 'contact/');
-        await page.goBack();  
+        await expect(page).toHaveURL('/' + 'contact/');
+    });
+
+
+    test('BC Parks blog footer link', async({ page })=>{
         await page.locator('#home-footer').getByText('BC Parks blog').click();
         await expect(page).toHaveURL('https://engage.gov.bc.ca/bcparksblog/');
-        await page.goBack();
+    });
+
+    test('Site map footer link', async({ page })=>{
         await page.getByRole('link', { name: 'Site map' }).click();
-        await expect(page).toHaveURL(baseURL + 'site-map/');
-        await page.goBack();
+        await expect(page).toHaveURL('/' + 'site-map/');
+    });
+
+    test('Disclaimer footer link', async({ page })=>{
         await page.getByRole('link', { name: 'Disclaimer' }).click();
         await expect(page).toHaveURL('https://www2.gov.bc.ca/gov/content/home/disclaimer');
-        await page.goBack();
+    });
+
+
+    test('Privacy footer link', async ({ page })=>{
         await page.getByRole('link', { name: 'Privacy' }).click();
         await expect(page).toHaveURL('https://www2.gov.bc.ca/gov/content/home/privacy');
-        await page.goBack();
+    });
+
+    test('Accessibility footer link', async({ page })=>{
         await page.getByRole('link', { name: 'Accessibility', exact: true }).click();
         await expect(page).toHaveURL('https://www2.gov.bc.ca/gov/content/home/accessible-government');
-        await page.goBack();
+    });
+
+    test('Copyright footer link', async ({ page })=>{
         await page.getByRole('link', { name: 'Copyright' }).click();
         await expect(page).toHaveURL('https://www2.gov.bc.ca/gov/content/home/copyright');
-        await page.goBack();
-
     });
 
     test('Verify social media links are visible and redirect to the correct page', async ({ browser }) => {
@@ -78,7 +102,7 @@ test.describe('Footer tests', ()=>{
 
         const page = await context.newPage();
 
-        await page.goto(baseURL);
+        await page.goto('/');
         await page.getByRole('link', { name: 'Facebook' }).click();
         await expect(page).toHaveURL('https://www.facebook.com/YourBCParks/');
         await page.goBack();
