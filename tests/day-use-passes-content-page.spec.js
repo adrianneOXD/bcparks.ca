@@ -1,9 +1,5 @@
-//@ts-check
-
 // Import the test and expect functions from Playwright
 import { test, expect } from '@playwright/test';
-
-//base URL for the tests
 
 //wait for the page to load before running the tests
 test.beforeEach(async ({page})=>{
@@ -11,7 +7,7 @@ test.beforeEach(async ({page})=>{
 });
 
 // Test navigation to the Day-use passes page via the mega menu
-test('Verify the navigation to the Day-use passes page', async ({ page }) => {
+test('Verify the navigation to the Day-use passes page', { tag: '@smoke' }, async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await page.getByRole('menuitem', { name: 'Reservations' }).click();
     await page.getByRole('menuitem', { name: 'Day-use passes' }).click();
@@ -21,7 +17,7 @@ test('Verify the navigation to the Day-use passes page', async ({ page }) => {
   });
 
 
-test('Verify the page content', async ({ page }) => {
+test('Verify the page content', { tag: '@smoke' }, async ({ page }) => {
     await page.goto('/' + 'reservations/day-use-passes/');
     test.setTimeout(60000);
     await expect(page.getByText('Home›Reservations›Day-use')).toBeVisible();
