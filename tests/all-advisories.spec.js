@@ -105,3 +105,4 @@ test.describe('All advisories page tests', ()=>{
         await allAdvisoriesPage.expectBackToTopButtonNotVisible();
     });
 });
+

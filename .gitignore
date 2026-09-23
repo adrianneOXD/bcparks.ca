@@ -211,3 +211,4 @@ bcparks.ca-scrape.laccdb
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/.playwright-mcp/

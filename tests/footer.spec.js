@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Footer tests', ()=>{
+test.describe('Footer tests', () => {
 
     test.beforeEach(async ({page})=>{
         await page.goto('/');
         await page.waitForLoadState('domcontentloaded');        
     });
 
-    test('Check that the footer blocker is present', async ({page})=>{
+    test('Check that the footer blocker is present', { tag: '@smoke' }, async ({page})=>{
         await expect(page.locator('#footer')).toBeVisible();
     });
 
@@ -18,7 +18,7 @@ test.describe('Footer tests', ()=>{
         await expect(page).toHaveURL('/');
     });
 
-    test('Check the heading on the footer is visible', async ({page}) =>{
+    test('Check the heading on the footer is visible', { tag: '@smoke'}, async ({page}) =>{
         await expect(page.locator('#home-footer').getByText('Get a permit')).toBeVisible();
         await expect(page.locator('#home-footer').getByText('Get involved')).toBeVisible(); 
         await expect(page.locator('#home-footer').getByText('Stay connected')).toBeVisible();

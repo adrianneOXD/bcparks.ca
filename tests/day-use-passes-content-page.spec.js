@@ -7,7 +7,7 @@ test.beforeEach(async ({page})=>{
 });
 
 // Test navigation to the Day-use passes page via the mega menu
-test('Verify the navigation to the Day-use passes page', { tag: '@smoke' }, async ({ page }) => {
+test('Verify the navigation to the Day-use passes page', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await page.getByRole('menuitem', { name: 'Reservations' }).click();
     await page.getByRole('menuitem', { name: 'Day-use passes' }).click();
@@ -17,7 +17,7 @@ test('Verify the navigation to the Day-use passes page', { tag: '@smoke' }, asyn
   });
 
 
-test('Verify the page content', { tag: '@smoke' }, async ({ page }) => {
+test('Verify the page content', async ({ page }) => {
     await page.goto('/' + 'reservations/day-use-passes/');
     test.setTimeout(60000);
     await expect(page.getByText('Home›Reservations›Day-use')).toBeVisible();

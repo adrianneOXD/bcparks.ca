@@ -43,9 +43,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menu')).toContainText('Accessibility');
         await page.getByRole('menuitem',{ name: 'Plan your trip', exact: true }).click();
         await expect(page).toHaveURL('/' + 'plan-your-trip/');
-        
-
-    })
+    });
 
     //Check the Reservation menu item, assert the navigateion to the corret page url
     test('Check the Reservations menu item' , async ({page})=>{
@@ -66,10 +64,8 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'BC Senior Camping Discount' })).toBeVisible();
         await expect(page.getByRole('menuitem', { name: 'Social Services Camping Fee' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Reservations', exact: true }).click();
-        await expect(page).toHaveURL('/' + 'reservations/');
-    
-        
-    })
+        await expect(page).toHaveURL('/' + 'reservations/');        
+    });
 
     //Check the Conservation menu item, assert the navigateion to the corret page url
     test('Check the Conservation menu item' , async ({page})=>{
@@ -94,8 +90,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Ecological reserves' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Conservation', exact: true }).click();
         await expect(page).toHaveURL('/' + 'conservation/');
-
-    })
+    });
 
     //Check the Get involved menu item, assert the navigateion to the corret page url
     test('Check the Get involved menu item' , async ({page})=>{
@@ -115,8 +110,7 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Participate in design' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Get involved', exact: true }).click();
         await expect(page).toHaveURL('/' + 'get-involved/');
-
-    })
+    });
 
     //Check the Park-use permit menu item, assert the navigateion to the corret page url
     test('Check the Park-use permits menu item' , async ({page})=>{
@@ -132,7 +126,6 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'Travel trade' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Park-use permits', exact: true }).click();
         await expect(page).toHaveURL('/' + 'park-use-permits/');
-
     })
 
     //Check the About menu item, assert the navigateion to the corret page url of About landing page
@@ -177,14 +170,20 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
         await expect(page.getByRole('menuitem', { name: 'News' })).toBeVisible();
         await page.getByRole('menuitem', { name: 'Get involved ' }).click();
         await expect(page.getByRole('menuitem', { name: 'Engage with us' })).toBeVisible()
-    })
+    });
 
     //Check the Contact menu item, assert the navigateion to the corret page url
     test ('Check the Contact menu item' , async ({page})=>{
         await expect(page.getByRole('menuitem', { name: 'Contact' })).toBeVisible();
         await page.getByRole('menuitem', {name: 'Contact'}).click();
         await expect(page).toHaveURL('/' + 'contact/');
-    })
+    });
+
+    test ('Navigate to BC Parks homepage', async({ page })=>{
+        await page.goto('https://bcparks.ca/');
+        await expect(page).toHaveURL('https://bcparks.ca/');
+    });
+    
 });
 
 
