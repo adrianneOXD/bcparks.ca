@@ -193,6 +193,9 @@ bcparks.ca-scrape.laccdb
 **/npm-debug.log*
 **/yarn-debug.log*
 **/yarn-error.log*
+docs/*.xlsx
+docs/*.pptx
+docs/*.zip
 
 **/cms/data/images/*
 **/scheduler/mail-test-**.html
