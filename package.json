@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "agents:update": "playwright init-agents --loop=claude && playwright init-agents --loop=vscode"
   },
   "keywords": [],
   "author": "",
