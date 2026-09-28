@@ -60,7 +60,6 @@
 **/*.out
 **/*.pid
 
-
 ############################
 # Logs and databases
 ############################
@@ -167,15 +166,15 @@ bcparks.ca-scrape.laccdb
 ##### Frontend ######
 
 # dependencies
-**//node_modules
-**//.pnp
+**/node_modules
+**/.pnp
 **/.pnp.js
 
 # testing
-**//coverage
+**/coverage
 
 # production
-**//build
+**/build
 
 # misc
 **/.DS_Store
@@ -208,11 +207,4 @@ docs/*.zip
 /blob-report/
 /playwright/.cache/
 /test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
 /.playwright-mcp/
