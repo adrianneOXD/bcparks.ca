@@ -2,19 +2,23 @@
 
 // Import the test and expect functions from Playwright
 import { test, expect } from '@playwright/test';
+import { BasePage } from './pages/basePage.js';
 
 //wait for the page to load before running the tests
-test.beforeEach(async ({page})=>{
-    await page.goto('/');
-});
 
-//test tverify the Megamenu
-test('Check the Megamenu is displayed', async ({page})=>{
-    await expect(page.getByRole('navigation').nth(1)).toBeVisible();
-});
 
-//test to check if the level 1 menu items are displayed
-test.describe('Check the level 1 menu items are displayed, active & clickable', ()=>{
+test.describe('Megamenu tests', ()=>{
+    let testPage;
+
+    test.beforeEach(async ({page})=>{
+        testPage = new BasePage(page);
+        await testPage.goto();
+        await testPage.waitForLoad();
+    });
+
+    test('Check the Megamenu is displayed', async ({page})=>{
+        await expect(page.getByRole('navigation').nth(1)).toBeVisible();
+}   );
 
     //Check the Find a park menu item, assert the navigateion to the corret page url
     test('Check the Find a park menu item' , async ({page})=>{
@@ -185,5 +189,3 @@ test.describe('Check the level 1 menu items are displayed, active & clickable', 
     });
     
 });
-
-
